@@ -1,0 +1,94 @@
+#creation{
+  background-color: #5BD6A3;
+  text-align: center;
+  height: 10%;
+  padding-top: 1.5%;
+  /*margin-left: 20%;
+  margin-right: 20%;*/
+  font-size: 2em;
+  color: white;
+font-family: cursive;
+}
+
+#marge{
+margin-left: 10%;
+
+  background-color: white;
+}
+#val{
+  background-color: white;
+    font-family: 'PT Sans', sans-serif;
+}
+
+
+#nom{
+  font: 1em sans-serif;
+  margin-top: 2%;
+  margin-left: 10%;
+}
+#raiso{
+  font: 1em sans-serif;
+  margin-top: 2%;
+  margin-left: 10%;
+}
+#clie{
+  font: 1em sans-serif;
+  margin-top: 2%;
+  margin-left: 10%;
+}
+#adr{
+  font: 1em sans-serif;
+  margin-top: 2%;
+  margin-left: 10%;
+  width:250%;
+}
+#cp{
+  font: 1em sans-serif;
+  position: relative;
+  margin-top: 2%;
+  margin-left: 10%;
+    left: 10%;
+      width:50%;
+
+}
+
+#type{
+  font: 1em sans-serif;
+  position: relative;
+  margin-top: 2%;
+  margin-left: 10%;
+    left: 10%;
+      width:50%;
+    }
+
+#cp1{
+  font: 1em sans-serif;
+  position: relative;
+  margin-top: 2%;
+  left: 5%;
+}
+
+#cliexiste{
+  font: 1em sans-serif;
+  position: relative;
+  margin-top: 2%;
+  margin-left: 20%;
+  color : red;
+  display:none;
+}
+
+#eff1{
+  font: 1em sans-serif;
+  position: relative;
+  margin-top: 2%;
+  left: 5%;
+}
+#typ1{
+  font: 1em sans-serif;
+  position: relative;
+  margin-top: 2%;
+  left: 5%;
+}
+/*td{
+  border: 2px solid black;
+}*/

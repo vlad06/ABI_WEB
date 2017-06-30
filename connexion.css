@@ -1,0 +1,45 @@
+body{
+  background-color: rgba(102,179,217);
+  font-family: 'Archivo Black', sans-serif;
+  padding-top: 3%;
+}
+.header{
+ display :flex;
+ margin-left: 10%;
+
+}
+h1{
+  /*margin-left: 20%;*/
+  font-size: 50px;
+  align-self: flex-end;
+}
+
+.theForm{
+  padding-top:  5%;
+  padding-bottom: 2%;
+}
+#imgutil{
+  margin-left: 70%;
+}
+
+#email{
+  margin-top: 10%;
+}
+
+#submit, #reset{
+  margin-top: 10%;
+}
+
+.divCache{
+	visibility:hidden;
+	height:auto;
+	position:absolute;
+	top:50px;
+	right:50px;
+	border:solid 1px;
+	background-color:white;
+}
+
+tbody{
+  /*border-style: dashed;*/
+}
