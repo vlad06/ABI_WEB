@@ -2,7 +2,7 @@
 class abiDAO {
 
   private static function ConnectAbi($user,$password){
-    $host='172.16.0.30';
+    $host='localhost';
     $bdd='ABI_AS400';
       try{
         $mysqlPDO=new PDO("mysql:host=$host;dbname=$bdd;charset=utf8",$user,$password,array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));

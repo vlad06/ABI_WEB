@@ -1,4 +1,5 @@
 <?php
+session_start();
 function afficheMenu($val){ ?>
   <div class="menu" style="width:100%; height:15%; margin-top: 3%; margin-left:4%;">
     <div class="row">
@@ -22,7 +23,10 @@ function afficheMenu($val){ ?>
   </div>
   <span class="border-0">
   <div class="bonjourclient">
-      <h3>Bonjour :</h3>
+      <!-- <h3>Bonjour : <span id="whoIs"></span></h3> -->
+      <?php
+      echo "<h3>Bonjour ".$_SESSION['login'].", session : ".$_SESSION['fonction']."</h3>";
+       ?>
       <button type="button" id="btnLogOut" class="btn btn-outline-success">Log Out</button>
   </div>
   </span>

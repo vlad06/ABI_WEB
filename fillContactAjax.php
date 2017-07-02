@@ -16,17 +16,12 @@ if ($row = mysqli_fetch_array($result))
   $array=array(
     'idClient' => $row['ID_CLIENT'],
     'idContact' => $row['ID_CONTACT'],
-    'raisonSociale' => $row['RAISON_SOCIALE'],
-    'nature' => $row['NATURE'],
-    'typeSociete' => $row['TYPE_SOCIETE'],
-    'telephone' => $row['TELEPHONE'],
-    'numeroRue' => $row['NUMERO_RUE'],
-    'nomRue' => $row['NOM_RUE'],
-    'codePostal' => $row['CODE_POSTAL'],
-    'ville' => $row['VILLE'],
-    'ca' => $row['CA'],
-    'effectif' => $row['EFFECTIF'],
-    'commentCom' => $row['COMMENT_COM']
+    'nomContact' => $row['NOM_CONTACT'],
+    'prenomContact' => $row['PRENOM_CONTACT'],
+    'telContact' => $row['TEL_CONTACT'],
+    'mailContact' => $row['MAIL_CONTACT'],
+    'fonctionContact' => $row['FONCTION_CONTACT'],
+
   );
   echo json_encode($array);
 }//client existant, pas d'erreur

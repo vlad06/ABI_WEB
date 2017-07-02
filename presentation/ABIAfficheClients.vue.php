@@ -1,5 +1,5 @@
 <?php //*****PHP ecran 2 *****
-
+// session_start();
 
 // chargement des fonctions d'affichages
 require('presentation\ABIEntete.vue.php');
@@ -18,8 +18,9 @@ function afficheClients($dataClient){
 	<div class="row" style="margin-top:1%">
 		<div class="col-xs-2" align="center">
 			<ul style="list-style:none">
-				<li><input id="btnDelete" class="btn btn-lg btn-default" type="button" name="bouton" value="deleteRow" style="width:90%;margin-top:30%"></li>
+				<li><input id="btnDelete" class="btn btn-lg btn-danger" type="button" name="bouton" value="deleteRow" style="width:90%;margin-top:30%"></li>
 				<li><input id="btnDetail" class="btnDetail btn btn-lg btn-default" type="button" name="btnDetail" value="Détails client" style="width:90%;margin-top:10%"></li>
+				<li><input id="btnModify" class="btnModify btn btn-lg btn-default" type="button" name="btnModify" value="Modifier client" style="width:90%;margin-top:10%"></li>
 			</ul>
 		</div>
 		<div class="col-xs-9">

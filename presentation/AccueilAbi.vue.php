@@ -16,17 +16,16 @@ function afficheEcranAccueil(){
 	<header style="width:100%; height:10%; margin-top: 3%;">
 		<?php afficheTitre(); ?>
 	</header>
-
-	<form	action= "#" onsubmit="return controleIdentAjax(document.getElementById('login'), document.getElementById('motpasse'));" id="formConnection">
+	<div id="msgLogin"></div>
+	<form	method="POST" id="formConnexion" action="">
 		<h2 id="pourVousConnect">Pour vous connecter...</h2>
 		<fieldset>
-
 			<!-- div qui englobe le label icon et textbox du "user" -->
 			<div class="ligneUser">
 				<label for="user" class="lbluser">USER</label>
 				<div class="valUtil">
 						<img src="img/bonhome.png" alt="icon utilisateur" height="25" id="iconutilisateur">
-						<input type="text" name="email" id="login" onfocus="viderreur();" />
+						<input type="text" name="login" id="login" />
 				</div>
 			</div>
 			<!-- div qui englobe le label password, son icon et textbox du "password" -->
@@ -34,24 +33,19 @@ function afficheEcranAccueil(){
 				<label for="password">PASSWORD</label>
 				<div class="valMotPasse">
 					<img src="img/cadenas.png" alt="icon cadenas" height="25" id="iconcadenas">
-					<input type="password" name="pssw" id="motpasse" onfocus="this.value='';" />
+					<input type="password" name="password" id="password" />
 				</div>
 			</div>
 			<div class="ligneBoutons">
-				<input type="submit" id ="submit" value="Envoyer" />
+				<input type="submit" id ="btnSubmit" value="Connecter" />
 				<input type="reset" id="reset" value="Recommencer" />
 			</div>
-
 			<font color="red"><span id="lblErreur"></span></font>&nbsp;</td>
 		</fieldset>
 	</form>
 	</div>
 	<div id="myGoogleMap" style="width:100%; height:350px;"></div>
-  <script src="javascript/abiMap.js"></script>
-  <script src="javascript/ajax.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjgbgdUIV-kNbksWtQuEx8gDPrnOmqChI&callback=initMap"></script>
-
-  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6TIimhB-BVvadvVcIBPk4uSb9O8IJHSc&callback=initMap"></script> -->
 </body>
 <footer>
 	<?php afficheFooter(); ?>

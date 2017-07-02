@@ -1,7 +1,7 @@
 <?php
  $idClient = $_GET["idClient"] ;
 
- $host = "172.16.0.30";
+ $host = "localhost";
  $user="utilweb";
  $password = "utilweb";
 $bdd = "abi_as400";

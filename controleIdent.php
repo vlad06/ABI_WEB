@@ -4,7 +4,7 @@
   //var_dump ($loggin);
 
 //définir la connection à la table Client de la BDD Commerce
- $host = "172.16.0.30";
+ $host = "localhost";
  $user="utilweb";
  $password = "utilweb";
 $bdd = "abi_as400";

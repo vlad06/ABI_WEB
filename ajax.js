@@ -34,7 +34,6 @@ function controleIdentAjax(login, motpasse) {
           console.log(result);
           if (result == 'OK') //identification réussie côté serveur...
           { // suite : script php controle var sessions puis page sécurisée suivante
-            alert('bordel');
             window.location.replace("ABIAfficheClients.php");
             //document.getElementById('erreuremail').innerHTML = result;
             // avec un bouton submit, le JS controle l'enchainement des pages
@@ -97,10 +96,6 @@ function controleIdentClient(idclient) {
               document.getElementById('cliexiste').style.display = "block";
 
           return false;
-          {
-
-          //console.log("l'id existe");
-          }
         }
       }; // fin définition function Ajax
 
