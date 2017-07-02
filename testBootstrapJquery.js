@@ -1,25 +1,60 @@
 $(document).ready(function() {
+  //**********************************************************
+  //***************DATATABLE FUNCTIONS******************
+  //*************************************************
 
+  //   var table = $('#clientTable').dataTable( {
+  //   "dom": 'ftlrip'
+  // } );
+
+  // var table = $('#clientTable').dataTable( {
+  //   "dom": '<"wrapper"flipt>'
+  // } );
+//show the database with load of options thanks to the datatable
+//the datatable is stocked within the var table for later use
+  var table = $('#clientTable').DataTable({
+    buttons: [
+      'excel','pdf']
+    // ],
+		// "dom": 'rt<"bottom"iflp><"clear">'
+	});
+//the class selected permit the highlightning of the current datatable row
+  $('#clientTable tbody').on('click', 'tr', function() {
+    if ($(this).hasClass('selected')) {
+      $(this).removeClass('selected');
+    } else {
+      table.$('tr.selected').removeClass('selected');
+      $(this).addClass('selected');
+    }
+  });
+
+  //*********************************************************
+  //******************AJAX FUNCTIONS**************************
+  //**********************************************************
+
+  //test in db if login and pass exist and match together
   $('#formConnexion').on('submit',function (e){
+    //let's prevent the nav from doing what it wants
     e.preventDefault();
-    $('#msgLogin').html('<img src="/img/plus.ico" alt="" />');
+    //let's show a little loading logo
+    $('#msgLogin').html('<img src="/img/source.gif" alt="" style="width:50px;height:50px"/>');
+    //recuperate the data in the textfields
     login = $("#login").val();
-    password = $("#password").val();
+    password = $("#motpasse").val();
     $.ajax({
+      //login and pass will be tested in this php file
       url:'myIdControlAjax.php',
-      type:'POST',
-      data:{login:login,password:password}
+      method:'POST',
+      data:{login:login,motpasse:password}
     })
       .done(function(data){
-        // data=JQuery.parseJSON(data);
+        //if (login/pass) exist and match
         if(data == "1"){
           location.replace("ABIAfficheClients.php");
-          $("#msgLogin").html('Alright !');
-          // location.replace("myIdControlAjax.php");
+          //otherwise
         } else {
-          $("#msgLogin").html('Erreur de connexion !'+msg);
-          $("#password").val('');
-          // location.replace("myIdControlAjax.php");
+          $("#msgLogin").html('Erreur de connexion !');
+          $("#motpasse").val('');
         }
       });
   });
@@ -28,7 +63,7 @@ $(document).ready(function() {
     $.ajax({
         method: "GET",
         url: "fillClientAjax.php",
-        data: {	idClient: ID	}
+        data: {	idClient: ID }
       })
       .done(function(msg) {
         client = jQuery.parseJSON(msg);
@@ -48,83 +83,42 @@ $(document).ready(function() {
         $("#numIdClient").html(client.idClient);
       });
   }
-  // function checkLogin(){
-  //   $('#msgLogin').html('<img src="/img/plus.ico" alt="" />');
-  //   login = $("#login").val();
-  //   password = $("#password").val();
-  //   alert("login : "+login+" \ pass : "+password);
-  //   console.log("login : "+login+" \ pass : "+password);
-  //   $.ajax({
-  //     url:'myIdControlAjax.php',
-  //     type:'post',
-  //     cache:false,
-  //     data:{login:login,password:password},
-  //     success:function(data){
-  //       if(data.grant == "1"){
-  //         window.location.replace("ABIAfficheClients.php");
-  //       } else {
-  //         $("msgLogin").html('Erreur de connexion !');
-  //         $("#password").val('');
-  //       }
-  //     }
-  //   });
-  // }
-	// $.extend( true, $.fn.dataTable.defaults, {
-	//     "searching": false,
-	//     "ordering": false
-	// } );
 
-	var table = $('#clientTable').DataTable({
-		"searching": true,
-		"dom": 'rt<"bottom"iflp><"clear">'
-	});
+  function getContactAjax(ID) {
+    $.ajax({
+        method: "GET",
+        url: "fillContactAjax.php",
+        data: { idClient: ID }
+      })
+      .done(function(msg) {
+        contact = jQuery.parseJSON(msg);
+        $("#idClientContact").val(contact.idClient);
+        $("#idContact").val(contact.idContact);
+        $("#nomContact").val(contact.nomContact);
+        $("#prenomContact").val(contact.prenomContact);
+        $("#telContact").val(contact.telContact);
+        $("#mailContact").val(contact.mailContact);
+        $("#fonctionContact").val(contact.fonctionContact);
+        $("#RSClient").html(contact.idClient);
+      });
+  }
 
-	//   var table = $('#clientTable').dataTable( {
-	//   "dom": 'ftlrip'
-	// } );
-
-	// var table = $('#clientTable').dataTable( {
-	//   "dom": '<"wrapper"flipt>'
-	// } );
-
-	$('#clientTable tbody').on('click', 'tr', function() {
-		if ($(this).hasClass('selected')) {
-			$(this).removeClass('selected');
-		} else {
-			table.$('tr.selected').removeClass('selected');
-			$(this).addClass('selected');
-		}
-	});
-
-	// $('#btnTest').on('click', function() {
-	// 	var idClient;
-	// 	var rowIndex = table.row('.selected').index();
-	// 	if (rowIndex >= 0) {
-	// 		idClient = $('tr.selected').attr('id');
-	// 		alert(idClient);
-	// 		header.location();
-	// 	} else {
-	// 		alert('pas de selection');
-	// 	}
-	// });
-
-	$('#btnDetail').on('click', function() {
-		if (table.row('.selected').index() >= 0) {
-			// $('#idClient').val(getId());
-			// $('#showFormClient').prop('readonly');
-			getClientAjax(getId());
-			$('#clientModalDetail').modal();
-		} else alert('merci de sélectionner un client');
-	});
-
-	function getId() {
+  function getId() {
 		if (table.row('.selected').index() >= 0) {
 			idClient = $('tr.selected').attr('id');
 		}
 		return idClient;
 	}
+  //********************************************************************
+  //**********BUTTON EVENTS*****************
+  //********************************************
 
-	$('#btnDelete').click(function() {
+  	$('#btnLogOut').click(function() {
+  		// alert('shit');
+  		window.location = "ABIAccueil.php";
+  	});
+
+  $('#btnDelete').click(function() {
     if(table.row('.selected').index() >= 0){
       deleteClientAjax(getId());
       table.row('.selected').remove().draw(false);
@@ -132,33 +126,35 @@ $(document).ready(function() {
       alert('merci de sélectionner un client');
     }
 
+  });
+
+	$('#btnDetail').on('click', function() {
+		if (table.row('.selected').index() >= 0) {
+			// $('#idClient').val(getId());
+			// $('#showFormClient').prop('readonly');
+			getClientAjax(getId());
+			$('#clientModalDetail').modal();
+		} else {
+      alert('merci de sélectionner un client');
+    }
 	});
 
+  $('#btnContact').on('click',function(){
+    if(table.row('.selected').index() >=0){
+      getContactAjax(getId());
+      $('#contactModalDetail').modal();
+    } else {
+      alert('merci de sélectionner un client');
+    }
+  });
 
 
-	function getContactAjax(ID) {
-		$.ajax({
-				method: "GET",
-				url: "fillContactAjax.php",
-				data: {
-					idClient: ID
-				}
-			})
-			.done(function(msg) {
-				client = jQuery.parseJSON(msg);
-				$("#idClient").val(client.idClient);
-				$("#idContact").val(client.idContact);
-				$("#nomContact").val(client.nomContact);
-				$("#prenomContact").val(client.prenomContact);
-				$("#telContact").val(client.telContact);
-				$("#mailContact").val(client.mailContact);
-				$("#fonctionContact").val(client.fonctionContact);
-			});
-	}
 
-	$('#btnLogOut').click(function() {
-		// alert('shit');
-		window.location = "ABIAccueil.php";
-	});
+
+
+
+
+
+
 
 });

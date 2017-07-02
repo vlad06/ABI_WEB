@@ -49,7 +49,7 @@ public static function ListeContactsParClient($user, $password, $idClient){
 $mysqlPDO = abiDAO::ConnectAbi($user, $password);
 // requete SQL des films du type demande (avec realisateur)
 // - projection
-$sql = 'select ID_CONTACT, NOM_CONTACT, PRENOM_CONTACT, TEL_CONTACT, FONCTION_CONTACT from contact where contact.ID_CLIENT=='.$idClient;
+$sql = 'select ID_CLIENT,ID_CONTACT, NOM_CONTACT, PRENOM_CONTACT, TEL_CONTACT, MAIL_CONTACT,FONCTION_CONTACT from contact where contact.ID_CLIENT='.$idClient;
 echo $sql;
 // - produit cartesien
 // Un paramètre est matérialisé dans le

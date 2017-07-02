@@ -1,5 +1,9 @@
 <?php
 session_start();
+if(!isset($_SESSION['login']) && !isset($_SESSION['fonction'])) {
+  header('location:ABIErreur.php');
+}
+else {
 function afficheMenu($val){ ?>
   <div class="menu" style="width:100%; height:15%; margin-top: 3%; margin-left:4%;">
     <div class="row">
@@ -27,7 +31,11 @@ function afficheMenu($val){ ?>
       <?php
       echo "<h3>Bonjour ".$_SESSION['login'].", session : ".$_SESSION['fonction']."</h3>";
        ?>
-      <button type="button" id="btnLogOut" class="btn btn-outline-success">Log Out</button>
+      <button type="button" id="btnLogOut" class="btn btn-outline-success"
+      >Log Out</button>
   </div>
   </span>
-<?php } ?>
+<?php
+  }
+}
+?>

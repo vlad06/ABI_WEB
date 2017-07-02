@@ -1,6 +1,7 @@
-<?php //************** code PHP objet en couches**************
+<?php 
 		// script affichage page d'accueil site ABI
-
+session_start();
+$_SESSION=array();
 // chargement des fonctions d'affichages
 require('presentation/ABIEntete.vue.php');
 require('presentation/ABITitre.vue.php');
@@ -16,7 +17,7 @@ function afficheEcranAccueil(){
 	<header style="width:100%; height:10%; margin-top: 3%;">
 		<?php afficheTitre(); ?>
 	</header>
-	<div id="msgLogin"></div>
+
 	<form	method="POST" id="formConnexion" action="">
 		<h2 id="pourVousConnect">Pour vous connecter...</h2>
 		<fieldset>
@@ -33,7 +34,9 @@ function afficheEcranAccueil(){
 				<label for="password">PASSWORD</label>
 				<div class="valMotPasse">
 					<img src="img/cadenas.png" alt="icon cadenas" height="25" id="iconcadenas">
-					<input type="password" name="password" id="password" />
+					<input type="password" name="motpasse" id="motpasse" />
+					<!-- div vide pour l'affichage des erreurs -->
+					<div><h4><span id="msgLogin" style="color:red"></span></h4></div>
 				</div>
 			</div>
 			<div class="ligneBoutons">

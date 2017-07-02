@@ -18,14 +18,15 @@ function afficheClients($dataClient){
 	<div class="row" style="margin-top:1%">
 		<div class="col-xs-2" align="center">
 			<ul style="list-style:none">
-				<li><input id="btnDelete" class="btn btn-lg btn-danger" type="button" name="bouton" value="deleteRow" style="width:90%;margin-top:30%"></li>
+				<li><input id="btnDelete" class="btn btn-lg btn-danger" type="button" name="bouton" value="deleteRow" style="width:90%;margin-top:25%"></li>
 				<li><input id="btnDetail" class="btnDetail btn btn-lg btn-default" type="button" name="btnDetail" value="Détails client" style="width:90%;margin-top:10%"></li>
 				<li><input id="btnModify" class="btnModify btn btn-lg btn-default" type="button" name="btnModify" value="Modifier client" style="width:90%;margin-top:10%"></li>
+				<li><button id="btnContact" class="btn btn-lg btn-default" type="button" name="btnContact" style="width:90%;margin-top:10%">Contacts</button></li>
 			</ul>
 		</div>
 		<div class="col-xs-9">
 			<div class="table-responsive listeClient">
-				<table id="clientTable" class="display table table-striped table-hover" style="width:95%">
+				<table id="clientTable" class="display table table-striped table-hover">
 					<thead>
 					<tr>
 						<!-- <th></th>
@@ -145,6 +146,58 @@ function afficheClients($dataClient){
 								<input type="text" class="form-control" id="commentCom" readonly>
 							</div>
 						</div>
+					<br/>
+						<input type="button" id="btnQuitter" class="btn btn-default" data-dismiss="modal" value="Quitter">
+					</form>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div class="modal fade" id="contactModalDetail" data-keyboard="false" data-backdrop="static" role="dialog" >
+		<div class="modal-dialog" >
+			<div class="modal-content" >
+				<div class="modal-header" style="padding:2% 3%; background-color:#5BD6A3">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h3>Détails client N°: <span id="RSClient"></span></h3>
+				</div>
+				<div class="modal-body" >
+					<form id="showFormContact" class="form-horizontal" >
+						<div id="contactList" class="table-responsive contactList">
+							<table id="contactTable" class="display table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>ID client</th>
+									<th>ID contact</th>
+									<th>Nom</th>
+									<th>Prenom</th>
+									<th>Téléphone</th>
+									<th>Email</th>
+									<th>fonction</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php
+								$dataContact=abiDAO::ListeContacts($user,$password);
+								for($i=0;$i<sizeof($dataContact);$i++){
+									echo '<tr id="'.$dataContact[$i]['ID_CONTACT'].'">';
+									echo '<td>'.$dataContact[$i]['ID_CLIENT'];
+									echo '</td>';
+									echo '<td>'.$dataContact[$i]['RAISON_SOCIALE'];
+									echo '</td>';
+									echo '<td>'.$dataContact[$i]['VILLE'];
+									echo '</td>';
+									echo '<td>'.$dataContact[$i]['TYPE_SOCIETE'];
+									echo '</td>';
+									echo '<td>'.$dataContact[$i]['CA'];
+									echo '</td>';
+									echo '</tr>';
+									}
+										?>
+									</tbody>
+							</table>
+						</div>
+
 					<br/>
 						<input type="button" id="btnQuitter" class="btn btn-default" data-dismiss="modal" value="Quitter">
 					</form>
