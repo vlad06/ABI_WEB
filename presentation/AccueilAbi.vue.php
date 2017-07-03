@@ -1,4 +1,4 @@
-<?php 
+<?php
 		// script affichage page d'accueil site ABI
 session_start();
 $_SESSION=array();
@@ -50,8 +50,6 @@ function afficheEcranAccueil(){
 	<div id="myGoogleMap" style="width:100%; height:350px;"></div>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjgbgdUIV-kNbksWtQuEx8gDPrnOmqChI&callback=initMap"></script>
 </body>
-<footer>
 	<?php afficheFooter(); ?>
-</footer>
 </html>
 <?php } ?>

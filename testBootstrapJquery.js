@@ -59,6 +59,59 @@ $(document).ready(function() {
       });
   });
 
+
+    $('#val').on('submit',function (e){
+      //let's prevent the nav from doing what it wants
+      e.preventDefault();
+      //let's show a little loading logo
+      var client = $(this).serialize();
+      //recuperate the data in the textfields
+      $.ajax({
+        //login and pass will be tested in this php file
+        url:'controleIDclient.php',
+        method:'POST',
+        data:client
+      })
+        .done(function(result){
+          //if (login/pass) exist and match
+          if(result == "1"){
+            // alert('client crée');
+            window.location.href = "ABIAfficheClients.php";
+            //otherwise
+          } else {
+           //$("#cliexiste").html('Erreur de connexion !' + result);
+            document.getElementById('cliexiste').style.display = "block";
+
+          }
+        });
+    });
+
+    $('#modifClient').on('submit',function (e){
+      //let's prevent the nav from doing what it wants
+      e.preventDefault();
+      //let's show a little loading logo
+      var client = $(this).serialize();
+      //recuperate the data in the textfields
+      $.ajax({
+        //login and pass will be tested in this php file
+        url:'modifClient.php',
+        method:'POST',
+        data:client
+      })
+        .done(function(result){
+          //if (login/pass) exist and match
+          if(result == "1"){
+            alert('client modifié');
+            // window.location.href = "ABIAfficheClients.php";
+
+          } else {
+           $("#cliexiste").html('Erreur de connexion !' + result);
+            document.getElementById('cliexiste').style.display = "block";
+
+          }
+        });
+    });
+
   function getClientAjax(ID) {
     $.ajax({
         method: "GET",
@@ -84,23 +137,45 @@ $(document).ready(function() {
       });
   }
 
-  function getContactAjax(ID) {
+// fucntion creee par bibiana test
+  function getClientAjaxPourModifier(ID) {
     $.ajax({
         method: "GET",
-        url: "fillContactAjax.php",
-        data: { idClient: ID }
+        url: "fillClientAjax.php",
+        data: {	idClient: ID }
       })
       .done(function(msg) {
-        contact = jQuery.parseJSON(msg);
-        $("#idClientContact").val(contact.idClient);
-        $("#idContact").val(contact.idContact);
-        $("#nomContact").val(contact.nomContact);
-        $("#prenomContact").val(contact.prenomContact);
-        $("#telContact").val(contact.telContact);
-        $("#mailContact").val(contact.mailContact);
-        $("#fonctionContact").val(contact.fonctionContact);
-        $("#RSClient").html(contact.idClient);
+        client = jQuery.parseJSON(msg);
+        $("#idClientModif").val(client.idClient);
+        $("#raisonSocialeModif").val(client.raisonSociale);
+        $("#numeroRueModif").val(client.numeroRue);
+        $("#nomRueModif").val(client.nomRue);
+        $("#villeModif").val(client.ville);
+        $("#telephoneModif").val(client.telephone);
+        $("#codePostalModif").val(client.codePostal);
+        $("#activiteModif").val(client.activite);
+        $("#typeSocieteModif").val(client.typeSociete);
+        $("#effectifModif").val(client.effectif);
+        $("#commentComModif").val(client.commentCom);
+        $("#natureModif").val(client.nature);
+        $("#caModif").val(client.ca);
+        $("#numIdClientModif").html(client.idClient);
       });
+  }
+
+  function getContactList(ID){
+    $.ajax({
+      method:"GET",
+      url: "testAfficheContact.php",
+      data: { idClient: ID}
+    })
+    .done(function(result) {
+      alert(result);
+      // listeContact=jQuery.parseJson(result);
+      // $('#contactTable'.DataTable({
+      //   "ajax": listeContact;
+      // }));
+    })
   }
 
   function getId() {
@@ -118,20 +193,9 @@ $(document).ready(function() {
   		window.location = "ABIAccueil.php";
   	});
 
-  $('#btnDelete').click(function() {
-    if(table.row('.selected').index() >= 0){
-      deleteClientAjax(getId());
-      table.row('.selected').remove().draw(false);
-    } else {
-      alert('merci de sélectionner un client');
-    }
-
-  });
 
 	$('#btnDetail').on('click', function() {
 		if (table.row('.selected').index() >= 0) {
-			// $('#idClient').val(getId());
-			// $('#showFormClient').prop('readonly');
 			getClientAjax(getId());
 			$('#clientModalDetail').modal();
 		} else {
@@ -139,9 +203,20 @@ $(document).ready(function() {
     }
 	});
 
+  $('#btnModifier').on('click', function() {
+		if (table.row('.selected').index() >= 0) {
+      getClientAjaxPourModifier(getId());
+
+			$('#clientModalModif').modal();
+		} else {
+      alert('merci de sélectionner un client');
+    }
+	});
+
   $('#btnContact').on('click',function(){
     if(table.row('.selected').index() >=0){
-      getContactAjax(getId());
+      getContactList(getId());
+      // $('#contactTable').DataTable();
       $('#contactModalDetail').modal();
     } else {
       alert('merci de sélectionner un client');

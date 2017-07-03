@@ -26,10 +26,11 @@ function afficheEcranCreat(){
 
 
 </br>
+<!-- <form action="ABICreatClie2.php" onsubmit="return verifForm(this)" method="post" id="val"> -->
 
-<form action="ABICreatClie2.php" onsubmit="return verifForm(this)" method="post" id="val">
+<form action= "" method="post" id="val">
+	<!-- <form action="" method="post" id="val"> -->
 <div id="marge" >
-
 	<TABLE >
     <tr >
       <td > <strong id="clie1"> Id client : </strong></td>
@@ -59,7 +60,7 @@ function afficheEcranCreat(){
 	</tr>
 	<tr >
 	 <td > <strong id="tel1">Téléphonne :</strong> </td>
-	 <td> <input type="text" id="nom" name="tel" onblur="verifTel(this)"> </td>
+	 <td> <input type="text" id="tel" name="tel" onblur="verifTel(this)"> </td>
 	 <td></td>
 	 <td></td>
  </tr>
@@ -91,6 +92,7 @@ function afficheEcranCreat(){
 	</TABLE>
 </br>
 	<span><input type="submit" id="controle" value="Enregistrer"></span>
+	<span><button onclick="location.href='ABIAfficheClients.php';">Annuler</span>
 </div>
 </form>
 

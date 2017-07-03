@@ -1,0 +1,120 @@
+
+@media (max-width: 990px){
+
+  .header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+/*accueil*/
+  #activeBretagne{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-size: 2.5em;
+  }
+  #logoAbi{
+      display: flex;
+      width:200px;
+      margin-left: 30%;
+  }
+  #btnLogOut{
+    background-color: #5BD6A3;
+    color:white;
+  }
+  #formConnexion h2{
+    display: none;
+  }
+  fieldset label{
+    display: none;
+  }
+  .valMotPasse{
+    margin-top: 8px;
+    margin-bottom: 10px;
+  }
+  .ligneUser, .lignePassword{
+    display: flex;
+    justify-content: space-around;
+  }
+  .ligneBoutons{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .ligneBoutons #reset{
+    display: none;
+  }
+  .ligneBoutons #btnSubmit{
+    background-color: #5BD6A3;
+    color:white;
+    border-radius: 5px;
+    border:none;
+    margin-top: 5px;
+  	padding:4px 10px;
+    border-radius:2px;
+    box-shadow:2px 2px 6px #999;
+	}
+  #motpasse, #login{
+    width: 200px;
+  }
+  .ligneUser{
+    margin-top: 20px;
+    }
+/*Affiche clients*/
+  .bonjourclient h3{
+    font-family: 'Merriweather Sans', sans-serif;
+    font-size: 1.3em;
+  }
+
+
+  .bonjourclient{
+    position: absolute;
+    top: 2px;
+    left:75%;
+  }
+
+  .corpsAffCli .row{
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%
+  }
+
+#btnDetail, #btnModifier, #btnContact{
+    background-color: #5BD6A3;
+    color:white;
+    border-radius: 5px;
+    border:none;
+    border-radius:2px;
+    box-shadow:2px 2px 6px #999;
+    margin-top: 10px;
+  }
+  
+  .corpsAffCli h2{
+    color:#5BD6A3;
+    margin-top: 70px;
+    margin-left: 10px;
+  }
+  .corpsAffCli input{
+    margin-top: 0px;
+  }
+  footer{
+    text-align: center;
+    margin-bottom: 0px:
+  }
+  .row{
+    margin: 0px;
+  }
+  /*mode modal*/
+  /*details du client selectionne*/
+      #btnAfficherContacts, #btnQuitterModifClt{
+        margin-left: 4%;
+      }
+      #btnQuitterAfficheClts, #btnEnregistModifClt{
+        margin-left: 50%;
+      }
+      input[type="button"]{
+        background-color: #5BD6A3;
+        color:white;
+      }
+}

@@ -4,17 +4,17 @@ if(!isset($_SESSION['login']) && !isset($_SESSION['fonction'])) {
   header('location:ABIErreur.php');
 }
 else {
-function afficheMenu($val){ ?>
+function afficheMenu($menuAfficher){ ?>
   <div class="menu" style="width:100%; height:15%; margin-top: 3%; margin-left:4%;">
     <div class="row">
       <!-- logo -->
-      <div class="col-md-2">
+      <div class="col-md-3">
         <img src="img/logoAbi.jpg" alt="logoAbi">
       </div>
       <!-- menu -->
-      <div class="col-md-9 col-md-offset1">
+      <div class="col-md-8 col-md-offset1 col-ms-1">
           <ul class="nav nav-tabs">
-            <?php if ($val== 1){?>
+            <?php if ($menuAfficher== 1){?>
               <li role="presentation" class="active"><a href="#">Accueil Gestion Commerciale</a></li>
               <li role="presentation"><a href="ABICreatClie.php">Ajouter un client</a></li>
             <?php } else {?>

@@ -8,8 +8,10 @@ function afficheEntete(){
   <title>Login utilisateur</title>
   <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/connexion2.css">
-  <!-- <script type="text/javascript" src="ajax.js"></script> -->
+  <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans" rel="stylesheet">
+  <link rel="stylesheet" href="css/mediaGrandEcran.css">
+  <link rel="stylesheet" href="css/mediaPetitEcran.css">
+    <!-- <script type="text/javascript" src="ajax.js"></script> -->
   <link href="https://fonts.googleapis.com/css?family=Archivo+Black" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">

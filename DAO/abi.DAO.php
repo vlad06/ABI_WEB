@@ -2,7 +2,7 @@
 class abiDAO {
 
   private static function ConnectAbi($user,$password){
-    $host='localhost';
+    $host='172.16.0.30';
     $bdd='ABI_AS400';
       try{
         $mysqlPDO=new PDO("mysql:host=$host;dbname=$bdd;charset=utf8",$user,$password,array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
@@ -17,6 +17,26 @@ class abiDAO {
     unset($mysqlPDO); //détruit l'objet PDO
   }
 
+  public static function getIdClient($idclient,$user,$password) {
+    $mysqlPDO=abiDAO::ConnectAbi($user,$password);
+    $sql="select * from client where ID_CLIENT=" . $idclient .";";
+
+    $recordSet=$mysqlPDO->query($sql);
+
+    $data=array();
+    foreach($recordSet as $row){
+      $data[]=$row;
+    }
+
+
+    $recordSet->closeCursor();
+    abiDAO::DisconnectAbi($mysqlPDO);
+    if($data){
+      return $data[0];
+    } else {
+      return false;
+    }
+  }
     public static function listeClients($user,$password){
       $mysqlPDO=abiDAO::ConnectAbi($user,$password);
       $sql='select ID_CLIENT,RAISON_SOCIALE,TYPE_SOCIETE,VILLE,CA,ACTIVITE,NATURE,TELEPHONE,EFFECTIF,NUMERO_RUE,NOM_RUE,CODE_POSTAL,COMMENT_COM from client order by ID_CLIENT';
@@ -50,7 +70,7 @@ $mysqlPDO = abiDAO::ConnectAbi($user, $password);
 // requete SQL des films du type demande (avec realisateur)
 // - projection
 $sql = 'select ID_CLIENT,ID_CONTACT, NOM_CONTACT, PRENOM_CONTACT, TEL_CONTACT, MAIL_CONTACT,FONCTION_CONTACT from contact where contact.ID_CLIENT='.$idClient;
-echo $sql;
+// echo $sql;
 // - produit cartesien
 // Un paramètre est matérialisé dans le
 // libellé de la requête ; sa valeur est
@@ -61,7 +81,11 @@ $recordSet = $mysqlPDO-> prepare($sql);
 // execution requete
 $recordSet->execute(array($idClient));
 // lecture tous enregistrements et transformation en tableau associatif PHP
-$data=$recordSet->fetchAll();
+// $data=$recordSet->fetchAll();
+$data=array();
+foreach($recordSet as $row){
+  $data[]=$row;
+}
 //var_dump($data) ; // pour test
 // pour faire propre
 $recordSet->closeCursor();
@@ -102,26 +126,26 @@ NOM_ADHERENT= ? " ;
 }
 
 // insere une ligne dans la table client
-public static function InsertNewClient($newClient, $user,$password){
+public static function InsertNewClient($client){
 // connection BDD
-$mysqlPDO = abiDAO::ConnectAbi($user, $password);
+$mysqlPDO = abiDAO::ConnectAbi("utilweb", "utilweb");
 
 // requete insert SQL (avec concaténations manuelles - pour voir...)
-$sql = 'insert into client(ID_CLIENT, RAISON_SOCIALE, TYPE_SOCIETE, VILLE, CA, ACTIVITE, NATURE, TELEPHONE, EFFECTIF, NUMERO_RUE, NOM_RUE, CODE_POSTAL, COMMENT_COM)
+$sql = 'insert into client(ID_CLIENT, RAISON_SOCIALE, TYPE_SOCIETE, VILLE, CA, ACTIVITE, NATURE, TELEPHONE, EFFECTIF, NOM_RUE, CODE_POSTAL, COMMENT_COM)
 values (';
-$sql .= $newClient->getID_CLIENT(). ', ';
-$sql .= '\'' . $newClient->getRAISON_SOCIALE(). '\', ';
-$sql .= '\'' . $newClient->getTYPE_SOCIETE(). '\', ';
-$sql .= '\'' . $newClient->getVILLE(). '\', ';
-$sql .= $newClient->getCA(). ', ';
-$sql .= '\'' . $newClient->getACTIVITE(). '\', ';
-$sql .= '\'' . $newClient->getNATURE(). '\', ';
-$sql .= '\'' . $newClient->getTELEPHONE(). '\', ';
-$sql .= $newClient->getEFFECTIF(). ', ';
-$sql .= $newClient->getNUMERO_RUE(). ', ';
-$sql .= '\'' . $newClient->getNOM_RUE(). '\', ';
-$sql .= '\'' . $newClient->getCODE_POSTAL(). '\', ';
-$sql .= '\'' . $newClient->getCOMMENT_COM(). '\'); ';
+$sql .= $client->getID_CLIENT(). ', ';
+$sql .= '\'' . $client->getRAISON_SOCIALE(). '\', ';
+$sql .= '\'' . $client->getTYPE_SOCIETE(). '\', ';
+$sql .= '\'' . $client->getVILLE(). '\', ';
+$sql .= $client->getCA(). ', ';
+$sql .= '\'' . $client->getACTIVITE(). '\', ';
+$sql .= '\'' . $client->getNATURE(). '\', ';
+$sql .= '\'' . $client->getTELEPHONE(). '\', ';
+$sql .= $client->getEFFECTIF(). ', ';
+// $sql .= $client->getNUMERO_RUE(). ', ';
+$sql .= '\'' . $client->getNOM_RUE(). '\', ';
+$sql .= '\'' . $client->getCODE_POSTAL(). '\', ';
+$sql .= '\'' . $client->getCOMMENT_COM(). '\'); ';
 
 //echo $sql; // pour test
 // utilisation outils PDO
@@ -135,6 +159,8 @@ $rs->execute();
 // pourrait être retourné comme résultat de la fonction
 // $nombre = $rs->rowCount();
 // echo $nombre; // pour test
+
+
 $rs->closeCursor();
 abiDAO::DisconnectAbi($mysqlPDO);
 }
@@ -167,6 +193,18 @@ $rs->execute();
 // pour faire propre
 $rs->closeCursor();
 abiDAO::DisconnectAbi($mysqlPDO);
+}
+public static function modifClients($user,$password,$monclient){
+  $mysqlPDO=abiDAO::ConnectAbi($user,$password);
+  $sql='UPDATE client SET client.ACTIVITE = _ ';
+  $recordSet=$mysqlPDO->query($sql);
+  $data=array();
+  foreach($recordSet as $row){
+    $data[]=$row;
+  }
+  $recordSet->closeCursor();
+  abiDAO::DisconnectAbi($mysqlPDO);
+  return $data;
 }
 }
 ?>

@@ -6,7 +6,7 @@ if(isset($_POST['login'])) {
 if(isset($_POST['motpasse'])) {
   $motpasse = $_POST['motpasse'] ;
 }
-$host = "localhost";
+$host = "172.16.0.30";
 $user="utilweb";
 $password = "utilweb";
 $bdd = "abi_as400";
@@ -19,10 +19,10 @@ $query = "select * from utilisateurs where login='" . $login ."';" ;
 
 $array=mysqli_fetch_array($result);
 
-if($array[2]==$motpasse && $motpasse != ""){
+if($array[1]==$motpasse && $motpasse != ""){
   session_start();
-	$_SESSION['fonction'] = $array[0];
-	$_SESSION['login']=$array[1];
+	$_SESSION['fonction'] = $array[2];
+	$_SESSION['login']=$array[0];
 	echo "1";
 } else {
   $_SESSION = array();
